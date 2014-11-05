@@ -31,7 +31,14 @@ Prawn::Document.generate("hello.pdf") do
   bidi = Bidi.new
   text bidi.render_visual "משפט עם עברית ו-English. מספרים: 12345 (וגם כל מיני סימני פיסוק) וגם סימן קריאה!"
 end
+```
 
+**Note:** Hebrew (or any language, really) characters must be present in the font used by Prawn for them to appear. If you don't see the characters you expect, try explicitly setting the font inside the Prawn block. For example, if you have the Unicode Arial font in `Arial.ttf`, you should add:
+```ruby
+font_families.update("Arial" => {
+  :normal => "Arial.ttf",
+});
+font("Arial")
 ```
 
 ### License
