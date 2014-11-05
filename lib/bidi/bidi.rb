@@ -731,6 +731,10 @@ class Bidi
     ret_value
   end
 
+  # Helper function to reverse the string for us before rendering.
+  def render_visual i_string, default_direction=nil
+    return to_visual(i_string, default_direction).reverse!
+  end
 
   def rearrange_level par, lvl, hsh_cur
     start=hsh_cur['start']

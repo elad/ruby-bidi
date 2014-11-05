@@ -16,10 +16,10 @@ Require the `bidi` module and use `to_visual`:
 require "bidi"
 
 bidi = Bidi.new
-bidi_string = bidi.to_visual "My סטרינג"
+bidi_string = bidi.to_visual "משפט עם עברית ו-English. מספרים: 12345 (וגם כל מיני סימני פיסוק) וגם סימן קריאה!"
 ```
 
-When rendering right-to-left text, some writers require reversing the string before passing it to them. [Prawn](https://github.com/prawnpdf/prawn) is one such example. The `to_rendered` function does this for you:
+When rendering right-to-left text, some writers require reversing the string before passing it to them. [Prawn](https://github.com/prawnpdf/prawn) is one such example. The `render_visual` function does this for you:
 
 ```
 require "prawn"
@@ -29,7 +29,7 @@ Prawn::Document.generate("hello.pdf") do
   self.text_direction = :rtl
 
   bidi = Bidi.new
-  text bidi.to_rendered "My סטרינג"
+  text bidi.render_visual "משפט עם עברית ו-English. מספרים: 12345 (וגם כל מיני סימני פיסוק) וגם סימן קריאה!"
 end
 
 ```
