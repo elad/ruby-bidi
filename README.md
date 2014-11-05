@@ -4,7 +4,7 @@ Ruby gem to help working with bidirectional (left-to-right and right-to-left) te
 
 ### Install
 
-```
+```shell
 gem install bidi
 ```
 
@@ -12,7 +12,7 @@ gem install bidi
 
 Require the `bidi` module and use `to_visual`:
 
-```
+```ruby
 require "bidi"
 
 bidi = Bidi.new
@@ -21,7 +21,7 @@ bidi_string = bidi.to_visual "My סטרינג"
 
 When rendering right-to-left text, some writers require reversing the string before passing it to them. [Prawn](https://github.com/prawnpdf/prawn) is one such example. The `to_rendered` function does this for you:
 
-```
+```ruby
 require "prawn"
 require "bidi"
 
