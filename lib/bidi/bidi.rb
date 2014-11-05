@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require './weakhashmap'
+require 'bidi/weakhashmap'
 
 class Integer
   def to_utf8_char
@@ -114,9 +114,10 @@ class Bidi
 
   def initialize
     @@idx_record_len=7
-    @idxFile = File.open("UnicodeData.idx", "r");
-    @dataFile = File.open("UnicodeData.txt", "r");
-    @mirrorFile = File.open("BidiMirroring.dat", "r");
+    @dataPath = Gem.loaded_specs["bidi"].full_gem_path + "/lib/data/";
+    @idxFile = File.open(@dataPath + "UnicodeData.idx", "r");
+    @dataFile = File.open(@dataPath + "UnicodeData.txt", "r");
+    @mirrorFile = File.open(@dataPath + "BidiMirroring.dat", "r");
     ObjectSpace.define_finalizer(self, proc {@idxFile.close; @dataFile.close; @mirrorFile.close})
     @num_of_indexes =  @idxFile.stat.size / @@idx_record_len
     @mirror_record_len=6

@@ -3,7 +3,7 @@
 # Make a simplified version of the BidiMirroring.txt file, 
 # that contains characters value and their mirrored version only.
 
-datFile = File.open("BidiMirroring.dat", 'w');
+datFile = File.open("../data/BidiMirroring.dat", 'w');
 
 File.open('BidiMirroring.txt', 'r'){|file|
   file.each_line {|line|
