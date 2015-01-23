@@ -644,38 +644,6 @@ class Bidi
       search_mirrored_value key
     end
 
-    def rearrange_level par, lvl, hsh_cur
-      start=hsh_cur['start']
-      end_p1=hsh_cur['end'] + 1
-      run_started=false
-      forward_index=nil
-      start.upto end_p1 do |ind| 
-        chars=par['characters']
-        char=chars[ind]
-        if !run_started and char and char['level']>=lvl
-          forward_index=ind
-        end
-        run_started=true if char and char['level']>=lvl
-        if run_started and (ind==end_p1 or char['level']<lvl) then
-          backward_index=ind - 1
-          interval_length = backward_index - forward_index
-          halfway = interval_length / 2
-          halfway -= 1 if interval_length.even?
-          0.upto halfway do
-            temp = chars[forward_index]
-            chars[forward_index]=chars[backward_index]
-            chars[backward_index] = temp
-            forward_index += 1
-            backward_index -= 1
-          end
-          run_started=false
-          next 
-        end
-
-        
-      end
-    end
-
     def to_visual i_string, default_direction=nil
       @valueArray = Array.new  # Array of values
       state=CHAR_START
@@ -766,6 +734,38 @@ class Bidi
       end
       
       ret_value
+    end
+
+    def rearrange_level par, lvl, hsh_cur
+      start=hsh_cur['start']
+      end_p1=hsh_cur['end'] + 1
+      run_started=false
+      forward_index=nil
+      start.upto end_p1 do |ind| 
+        chars=par['characters']
+        char=chars[ind]
+        if !run_started and char and char['level']>=lvl
+          forward_index=ind
+        end
+        run_started=true if char and char['level']>=lvl
+        if run_started and (ind==end_p1 or char['level']<lvl) then
+          backward_index=ind - 1
+          interval_length = backward_index - forward_index
+          halfway = interval_length / 2
+          halfway -= 1 if interval_length.even?
+          0.upto halfway do
+            temp = chars[forward_index]
+            chars[forward_index]=chars[backward_index]
+            chars[backward_index] = temp
+            forward_index += 1
+            backward_index -= 1
+          end
+          run_started=false
+          next 
+        end
+
+        
+      end
     end
   end
 
