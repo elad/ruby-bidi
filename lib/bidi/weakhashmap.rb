@@ -33,10 +33,10 @@ class WeakHashMap
     ref=@internalHash[key]
     return nil unless ref
     GC.disable
-    unless ref.weakref_alive? {
+    unless ref.weakref_alive?
       GC.enable
       return nil
-    }
+    end
 
     ret_value = ref.__getobj__.value
     GC.enable
@@ -48,6 +48,4 @@ class WeakHashMap
        @internalHash.delete key
     end
   end
-end
-
 end
